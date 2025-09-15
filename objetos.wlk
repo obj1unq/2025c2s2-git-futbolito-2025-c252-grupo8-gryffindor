@@ -17,11 +17,14 @@ object lionel {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
 	
+
 }
 
 
 object pelota {
+
 	const property image="pelota.png"
+
 	var property position = game.at(5,5)	
 	var property jugador = lionel
 
@@ -45,4 +48,19 @@ object pelota {
 	method estaConLaPelota() {
 	  return self.position() == jugador.position()
 	}
+
+
+
+	method patear(){
+		 self.validarPosicion()
+		 position =  game.at((game.width() - 1).min(position.x() + 3), position.y()) 
+		
+	}
+     method validarPosicion(){
+		 if (!(jugador.position().x() == position.x())){
+			 self.error("el jugadór No está lo suficientemente cerca para patear la pelota")
+			
+		 }
+	 }
+
 }
