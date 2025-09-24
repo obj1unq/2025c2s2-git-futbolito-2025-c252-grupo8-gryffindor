@@ -16,6 +16,20 @@ object lionel {
 	method avanzar() {
 		position = game.at((game.width() - 1).min(position.x() + 1), position.y()) 
 	}
+
+	method taquito() {
+	  self.confirmarSiEstaLaPelotaEnLionel()
+	  pelota.moverConBotin()
+	}
+
+	method laPelotaEstaEnLionel() {
+	  return pelota.position() == self.position()
+	}
+
+	method confirmarSiEstaLaPelotaEnLionel() {
+	  if (not self.laPelotaEstaEnLionel())
+	  	self.error("La pelota no esta en Lionel")
+	}
 	
 
 }
@@ -26,6 +40,12 @@ object pelota {
 	const property image="pelota.png"
 
 	var property position = game.at(5,5)	
+
+
+	method moverConBotin() {
+	  position = game.at(0.max(position.x() - 2), position.y()) 
+	}
+
 	var property jugador = lionel
 
 	method subir() {
@@ -63,4 +83,6 @@ object pelota {
 		 }
 	 }
 
+
 }
+
