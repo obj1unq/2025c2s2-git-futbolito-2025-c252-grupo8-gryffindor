@@ -22,11 +22,36 @@ object lionel {
 
 
 object pelota {
-	const jugador = lionel
-	const property image="pelota.png"
-	var property position = game.at(5,5)
 
-		method patear(){
+	const property image="pelota.png"
+
+	var property position = game.at(5,5)	
+	var property jugador = lionel
+
+	method subir() {
+		self.noLlegoAlaPelota()
+	  	position = position.up(1)
+	 	game.schedule(2000, {self.bajar()})
+	}
+
+	method bajar() {
+	  position = position.down(1)
+	}
+
+
+	method noLlegoAlaPelota() {
+	  if(not self.estaConLaPelota()){
+			self.error("Liones no esta en posicion con la pelota")
+	  }
+	}
+
+	method estaConLaPelota() {
+	  return self.position() == jugador.position()
+	}
+
+
+
+	method patear(){
 		 self.validarPosicion()
 		 position =  game.at((game.width() - 1).min(position.x() + 3), position.y()) 
 		
@@ -37,4 +62,5 @@ object pelota {
 			
 		 }
 	 }
+
 }
